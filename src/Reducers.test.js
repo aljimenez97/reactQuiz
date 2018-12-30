@@ -136,6 +136,98 @@ describe('global reducer', () => {
             expect(GlobalState(state, action)).toEqual(expectedState);
         });
 
+        it('QUESTION_ANSWER -> question should have the attribute userAnswer ', () => {
+            let q = [
+                {
+                    answer: "Tokyo",
+                    attachment: {
+                        filename: "tokyo.jpg",
+                        mime: "image/jpeg",
+                        url: "https://res.cloudinary.com/core-upm/image/upload/v1533286607/core/quiz2018/attachments/m5stbgemzdgqnihwoyse.jpg"
+                    },
+                    author: {
+                        isAdmin: false,
+                        username: "slp"
+                    },
+                    favourite: false,
+                    id: 0,
+                    question: "Capital of Japan",
+                    tips: ["La respuesta está en inglés"]
+
+                },
+                {
+                    answer: "Madrid",
+                    attachment: {
+                        filename: "tokyo.jpg",
+                        mime: "image/jpeg",
+                        url: "https://res.cloudinary.com/core-upm/image/upload/v1533286607/core/quiz2018/attachments/m5stbgemzdgqnihwoyse.jpg"
+                    },
+                    author: {
+                        isAdmin: false,
+                        username: "cvm"
+                    },
+                    favourite: false,
+                    id: 1,
+                    question: "Capital of Spain",
+                    tips: ["La respuesta está en inglés"]
+
+                }
+            ];
+            let qAnswered = [
+                {
+                    answer: "Tokyo",
+                    attachment: {
+                        filename: "tokyo.jpg",
+                        mime: "image/jpeg",
+                        url: "https://res.cloudinary.com/core-upm/image/upload/v1533286607/core/quiz2018/attachments/m5stbgemzdgqnihwoyse.jpg"
+                    },
+                    author: {
+                        isAdmin: false,
+                        username: "slp"
+                    },
+                    favourite: false,
+                    id: 0,
+                    question: "Capital of Japan",
+                    tips: ["La respuesta está en inglés"],
+                    userAnswer: "HongKong"
+
+                },
+                {
+                    answer: "Madrid",
+                    attachment: {
+                        filename: "tokyo.jpg",
+                        mime: "image/jpeg",
+                        url: "https://res.cloudinary.com/core-upm/image/upload/v1533286607/core/quiz2018/attachments/m5stbgemzdgqnihwoyse.jpg"
+                    },
+                    author: {
+                        isAdmin: false,
+                        username: "cvm"
+                    },
+                    favourite: false,
+                    id: 1,
+                    question: "Capital of Spain",
+                    tips: ["La respuesta está en inglés"]
+
+                }
+            ];
+            let answer = "HongKong"
+            let action = { type: types.QUESTION_ANSWER, payload: {index:0, answer: answer} };
+            let state = {
+                score: 0,
+                finished: false,
+                currentQuestion: 0,
+                questions: q,
+                time: 120 };
+            let expectedState = {
+                score: 0,
+                finished: false,
+                currentQuestion: 0,
+                questions: qAnswered,
+                time: 120 };
+
+            expect(GlobalState(state, action)).toEqual(expectedState);
+        });
+
         it('SUBMIT -> score should be 1', () => {
             let q = [
                 {
@@ -227,7 +319,7 @@ describe('global reducer', () => {
             expect(GlobalState(state, action)).toEqual(expectedState);
         });
 
-        it('DECREASE_COUNTER -> time should be ', () => {
+        it('DECREASE_COUNTER -> time should be 119', () => {
             let q = [
                 {
                     answer: "Tokyo",
@@ -277,6 +369,60 @@ describe('global reducer', () => {
                 currentQuestion: 0,
                 questions: q,
                 time: 119 };
+
+            expect(GlobalState(state, action)).toEqual(expectedState);
+        });
+
+        it('START_COUNTER -> time should be 120', () => {
+            let q = [
+                {
+                    answer: "Tokyo",
+                    attachment: {
+                        filename: "tokyo.jpg",
+                        mime: "image/jpeg",
+                        url: "https://res.cloudinary.com/core-upm/image/upload/v1533286607/core/quiz2018/attachments/m5stbgemzdgqnihwoyse.jpg"
+                    },
+                    author: {
+                        isAdmin: false,
+                        username: "slp"
+                    },
+                    favourite: false,
+                    id: 0,
+                    question: "Capital of Japan",
+                    tips: ["La respuesta está en inglés"]
+
+                },
+                {
+                    answer: "Madrid",
+                    attachment: {
+                        filename: "tokyo.jpg",
+                        mime: "image/jpeg",
+                        url: "https://res.cloudinary.com/core-upm/image/upload/v1533286607/core/quiz2018/attachments/m5stbgemzdgqnihwoyse.jpg"
+                    },
+                    author: {
+                        isAdmin: false,
+                        username: "cvm"
+                    },
+                    favourite: false,
+                    id: 1,
+                    question: "Capital of Spain",
+                    tips: ["La respuesta está en inglés"]
+
+                }
+            ];
+            let action = { type: types.START_COUNTER};
+            let state = {
+                score: 0,
+                finished: false,
+                currentQuestion: 0,
+                questions: q,
+                time: 0 };
+            let expectedState = {
+                score: 0,
+                finished: false,
+                currentQuestion: 0,
+                questions: q,
+                time: 120 };
 
             expect(GlobalState(state, action)).toEqual(expectedState);
         });
