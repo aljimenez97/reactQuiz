@@ -5,13 +5,18 @@ import Content from "./Content";
 import Game from './Game';
 import ReactDOM from 'react-dom';
 import React from 'react';
-import {questionAnswer} from "./redux/actions";
 import ReactTestUtils from 'react-dom/test-utils';
 import configureStore from 'redux-mock-store'
 
 
 
 describe('global reducer', () => {
+
+    let mockStore = configureStore();
+    let store = mockStore();
+    beforeEach(() => { // Runs before each test in the suite
+        store.clearActions();
+    });
 
     it('should return the initial state', () => {
         let initialState  = {
@@ -27,12 +32,7 @@ describe('global reducer', () => {
         expect(GlobalState(undefined, action)).toEqual(initialState)
     })
 
-    describe('questions', () => {
-        let mockStore = configureStore();
-        let store = mockStore();
-        beforeEach(() => { // Runs before each test in the suite
-            store.clearActions();
-        });
+    describe('test for all the reducers', () => {
 
         it('returns the correct state for INIT_QUESTIONS', () => {
             let q = [
@@ -82,7 +82,7 @@ describe('global reducer', () => {
             expect(GlobalState(undefined, action)).toEqual(expectedState);
         });
 
-        it('CHANGE_QUESTION -> currentQuestion should be 1', () => {
+        it('CHANGE_QUESTION -> "currentQuestion" should be 1', () => {
             let q = [
                 {
                     answer: "Tokyo",
@@ -136,7 +136,7 @@ describe('global reducer', () => {
             expect(GlobalState(state, action)).toEqual(expectedState);
         });
 
-        it('QUESTION_ANSWER -> question should have the attribute userAnswer ', () => {
+        it('QUESTION_ANSWER -> "question" should have the attribute userAnswer ', () => {
             let q = [
                 {
                     answer: "Tokyo",
@@ -228,7 +228,7 @@ describe('global reducer', () => {
             expect(GlobalState(state, action)).toEqual(expectedState);
         });
 
-        it('SUBMIT -> score should be 1', () => {
+        it('SUBMIT -> "score" should be 1 and "finished" should be true', () => {
             let q = [
                 {
                     answer: "Tokyo",
@@ -319,7 +319,7 @@ describe('global reducer', () => {
             expect(GlobalState(state, action)).toEqual(expectedState);
         });
 
-        it('DECREASE_COUNTER -> time should be 119', () => {
+        it('DECREASE_COUNTER -> "time" should be 119', () => {
             let q = [
                 {
                     answer: "Tokyo",
@@ -373,7 +373,7 @@ describe('global reducer', () => {
             expect(GlobalState(state, action)).toEqual(expectedState);
         });
 
-        it('START_COUNTER -> time should be 120', () => {
+        it('START_COUNTER -> "time" should be 120', () => {
             let q = [
                 {
                     answer: "Tokyo",
