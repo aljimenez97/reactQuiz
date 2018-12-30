@@ -13,9 +13,9 @@ export default class Button extends React.Component {
         return (
             <button onClick={this.clickFunction} disabled={this.props.isDisabled}
                     style={{cursor: this.props.isDisabled ? 'not-allowed' : 'pointer'}}>
-                <i className={"material-icons"}>
+                <span className={"material-icons"}>
                     {this.props.buttonIcon}
-                </i>
+                </span>
                 {this.props.buttonName}
             </button>
         );

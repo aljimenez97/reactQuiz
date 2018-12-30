@@ -85,11 +85,11 @@ class App extends Component {
         let isLastQuestion = (currentQuestion === (numQuestions-1));
 
         return (
-            <div className="App">
-               <Navbar title={"QuizGame"}/>
+            <h1 className="App">
+               <Navbar aria-role={"heading"} title={"QuizGame"}/>
                 {this.props.questions.length > 0 ?
                     (
-                        <div className={"mainContainer"}>
+                        <h2 className={"mainContainer"}>
                             <Counter time={this.props.time} count={this.modifyCounter}/>
                             <Game question={this.props.questions[this.props.currentQuestion]}
                                   currentQuestion = {this.props.currentQuestion}
@@ -106,15 +106,15 @@ class App extends Component {
 
                             />
 
-                        </div>
+                        </h2>
 
                     ) :
                     (
-                        <div>No hay preguntas =(</div>
+                        <h2 className={"noQuestions"}> Cargando las preguntas... </h2>
                     )
                 }
 
-            </div>
+            </h1>
         );
     }
 }
