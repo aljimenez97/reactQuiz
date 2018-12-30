@@ -60,7 +60,7 @@ body {
 .timerContainer .timerNum{
     display: flex;
     flex-direction: row;
-    width: 15%;
+    felx:1;
     padding: 20px;
     justify-content: center;
     font-size: 1.5vw;

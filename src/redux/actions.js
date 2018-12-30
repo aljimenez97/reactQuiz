@@ -4,6 +4,8 @@ export const SUBMIT = 'SUBMIT';
 export const INIT_QUESTIONS = 'INIT_QUESTIONS';
 export const DECREASE_COUNTER = 'DECREASE_COUNTER';
 export const START_COUNTER = 'START_COUNTER';
+export const RESET_COUNTER = 'RESET_COUNTER';
+
 
 
 export function questionAnswer(index, answer) {
@@ -28,5 +30,9 @@ export function decreaseCounter() {
 
 export function startCounter() {
     return { type: START_COUNTER };
+}
+
+export function resetCounter() {
+    return { type: RESET_COUNTER };
 }
 

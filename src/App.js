@@ -1,7 +1,10 @@
 import React, { Component } from 'react';
 import './App.css';
 import { connect } from 'react-redux'
-import {changeQuestion, initQuestions, questionAnswer, submit, decreaseCounter, startCounter} from "./redux/actions";
+import {
+    changeQuestion, initQuestions, questionAnswer, submit, decreaseCounter, startCounter,
+    resetCounter
+} from "./redux/actions";
 
 import Game from './Game';
 import Navbar from "./Navbar";
@@ -27,6 +30,8 @@ class App extends Component {
     }
     submitQuestions(){
         this.props.dispatch(submit(this.props.questions));
+        this.props.dispatch(resetCounter());
+
     }
 
     loadQuizzes(quizzes){
@@ -54,8 +59,7 @@ class App extends Component {
                 } else {
                     myTimer = this.props.time;
                     clearInterval(myVar);
-                    this.props.dispatch(submit(this.props.questions));
-                    //this.props.dispatch(finishCounter());
+                    this.submitQuestions();
                 }
             }, 1000)
 
