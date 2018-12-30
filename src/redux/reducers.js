@@ -65,13 +65,13 @@ function questions(state = [], action = {}) {
     }
 }
 
-function time(state = 10, action={}) {
+function time(state = 120, action={}) {
     switch(action.type) {
         case DECREASE_COUNTER:
             let c = --state;
             return c;
         case START_COUNTER:
-            let a = 10;
+            let a = 120;
             return a;
         default:
             return state;

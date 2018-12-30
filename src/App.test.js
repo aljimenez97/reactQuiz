@@ -1,9 +1,27 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
 import App from './App';
+import Navbar from "./Navbar";
+import configureStore from 'redux-mock-store'
+
+import {mount} from 'enzyme';
+import {Provider} from "react-redux";
+
+const mockStore = configureStore()
+let store,wrapper
+let initialState  = {
+    score: 0,
+    finished: false,
+    currentQuestion: 0,
+    questions: [],
+    time: 120
+};
+
+beforeEach(()=>{
+    store = mockStore(initialState)
+    wrapper = mount( <Provider store={store}><App /></Provider> )
+})
 
 it('renders without crashing', () => {
-  const div = document.createElement('div');
-  ReactDOM.render(<App />, div);
-  ReactDOM.unmountComponentAtNode(div);
+    const h = <Navbar title={"QuizGame"}/>;
+    expect(wrapper.contains(h)).toEqual(true);
 });

@@ -40,6 +40,7 @@ class App extends Component {
                         quizzes.push(item);
                     }
                 });
+                console.log(quizzes)
                 this.props.dispatch(initQuestions(quizzes));
             })
     }
