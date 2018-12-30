@@ -18,8 +18,10 @@ class App extends Component {
         this.submitQuestions = this.submitQuestions.bind(this);
         this.loadQuizzes = this.loadQuizzes.bind(this);
         this.restart = this.restart.bind(this);
-        this.modifyCounter = this.modifyCounter.bind(this);
+        this.createTimer = this.createTimer.bind(this);
+        this.deleteTimer = this.deleteTimer.bind(this);
         this.startCounter = this.startCounter.bind(this);
+        this.timer = this.createTimer();
 
     }
     previousQuestion(){
@@ -49,19 +51,19 @@ class App extends Component {
             })
     }
 
-    modifyCounter(){
-        let myTimer = 120;
-            let myVar = setInterval(() => {
-                if(myTimer > 0){
-                    myTimer--;
-                    this.props.dispatch(decreaseCounter());
-                } else {
-                    myTimer = this.props.time;
-                    clearInterval(myVar);
-                    this.submitQuestions();
-                }
-            }, 1000)
+    createTimer(){
+        return setInterval(() => {
+            if(this.props.time > 0){
+                this.props.dispatch(decreaseCounter());
+            } else {
+                this.submitQuestions();
+            }
+        }, 1000)
+    }
 
+    deleteTimer(){
+        clearInterval(this.timer);
+        this.timer = 0;
     }
 
     startCounter(){
@@ -71,13 +73,13 @@ class App extends Component {
     restart(){
         let quizzes = [];
         this.loadQuizzes(quizzes);
+        this.deleteTimer();
         this.startCounter();
-        this.modifyCounter();
+        this.timer = this.createTimer();
     }
     componentDidMount(){
         let quizzes = [];
         this.loadQuizzes(quizzes);
-        this.modifyCounter();
     }
     render() {
 
@@ -93,7 +95,7 @@ class App extends Component {
                 {this.props.questions.length > 0 ?
                     (
                         <div className={"mainContainer"}>
-                            <Counter time={this.props.time} count={this.modifyCounter}/>
+                            <Counter time={this.props.time} />
                             <Game question={this.props.questions[this.props.currentQuestion]}
                                   currentQuestion = {this.props.currentQuestion}
                                   onQuestionAnswer={(answer) => {
