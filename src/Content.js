@@ -17,7 +17,7 @@ export default class Content extends React.Component {
                 </div>
                 <div className={"questionContainer"}>
                     <Question question={this.props.question.question}/>
-                    <label for="answerInput" style={{fontSize: "1vw", padding: "10px", color: "#32bebe"}}>TYPE YOUR ANSWER HERE</label>
+                    <label htmlFor="answerInput" style={{fontSize: "1vw", padding: "10px", color: "#32bebe"}}>TYPE YOUR ANSWER HERE</label>
                     <input name={"answerInput"} id={"answerInput"} placeholder={"Answer..."}
                         type={"text"} value={this.props.question.userAnswer || ''}
                         onChange={(e) => {

@@ -45,7 +45,6 @@ class App extends Component {
                         quizzes.push(item);
                     }
                 });
-                console.log(quizzes)
                 this.props.dispatch(initQuestions(quizzes));
             })
     }
@@ -93,7 +92,7 @@ class App extends Component {
                <Navbar aria-role={"heading"} title={"QuizGame"}/>
                 {this.props.questions.length > 0 ?
                     (
-                        <h2 className={"mainContainer"}>
+                        <div className={"mainContainer"}>
                             <Counter time={this.props.time} count={this.modifyCounter}/>
                             <Game question={this.props.questions[this.props.currentQuestion]}
                                   currentQuestion = {this.props.currentQuestion}
@@ -110,11 +109,11 @@ class App extends Component {
 
                             />
 
-                        </h2>
+                        </div>
 
                     ) :
                     (
-                        <h2 className={"noQuestions"}> Cargando las preguntas... </h2>
+                        <div className={"noQuestions"}> Cargando las preguntas... </div>
                     )
                 }
 
