@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
 import './App.css';
 import { connect } from 'react-redux'
-import {changeQuestion, initQuestions, questionAnswer, submit} from "./redux/actions";
+import {changeQuestion, initQuestions, questionAnswer, submit, decreaseCounter, startCounter} from "./redux/actions";
 
 import Game from './Game';
 import Navbar from "./Navbar";
+import Counter from "./Counter";
 
 class App extends Component {
     constructor(props){
@@ -14,6 +15,8 @@ class App extends Component {
         this.submitQuestions = this.submitQuestions.bind(this);
         this.loadQuizzes = this.loadQuizzes.bind(this);
         this.restart = this.restart.bind(this);
+        this.modifyCounter = this.modifyCounter.bind(this);
+        this.startCounter = this.startCounter.bind(this);
 
     }
     previousQuestion(){
@@ -26,22 +29,6 @@ class App extends Component {
         this.props.dispatch(submit(this.props.questions));
     }
 
-    /*loadQuizzes(page, quizzes){
-        fetch("https://quiz2019.herokuapp.com/api/quizzes?token=17f7c4049dc98483ec00&pageno="+page)
-            .then((response) => {
-                return response.json();
-            })
-            .then((json) => {
-                if(json.quizzes.length !== 0){
-                    json.quizzes.map((item) => {
-                        quizzes.push(item)
-                    });
-                    this.loadQuizzes(page+1, quizzes);
-                } else{
-                    this.props.dispatch(initQuestions(quizzes));
-                }
-            })
-    }*/
     loadQuizzes(quizzes){
         fetch("https://quiz2019.herokuapp.com/api/quizzes/random10wa?token=17f7c4049dc98483ec00")
             .then((response) => {
@@ -57,13 +44,36 @@ class App extends Component {
             })
     }
 
+    modifyCounter(){
+        let myTimer = 120;
+            let myVar = setInterval(() => {
+                if(myTimer > 0){
+                    myTimer--;
+                    this.props.dispatch(decreaseCounter());
+                } else {
+                    myTimer = this.props.time;
+                    clearInterval(myVar);
+                    this.props.dispatch(submit(this.props.questions));
+                    //this.props.dispatch(finishCounter());
+                }
+            }, 1000)
+
+    }
+
+    startCounter(){
+        this.props.dispatch(startCounter());
+    }
+
     restart(){
         let quizzes = [];
         this.loadQuizzes(quizzes);
+        this.startCounter();
+        this.modifyCounter();
     }
     componentDidMount(){
         let quizzes = [];
         this.loadQuizzes(quizzes);
+        this.modifyCounter();
     }
     render() {
 
@@ -78,20 +88,25 @@ class App extends Component {
                <Navbar title={"QuizGame"}/>
                 {this.props.questions.length > 0 ?
                     (
-                        <Game question={this.props.questions[this.props.currentQuestion]}
-                              currenrtQuestion = {this.props.currentQuestion}
-                              onQuestionAnswer={(answer) => {
-                                  this.props.dispatch(questionAnswer(this.props.currentQuestion, answer))}}
-                              onSubmit = {this.submitQuestions}
-                              onNextQuestion = {this.nextQuestion}
-                              isLastQuestion = {isLastQuestion}
-                              onPreviousQuestion = {this.previousQuestion}
-                              isFirstQuestion = {isFirstQuestion}
-                              score = {this.props.score}
-                              finished = {this.props.finished}
-                              restart={this.restart}
+                        <div className={"mainContainer"}>
+                            <Counter time={this.props.time} count={this.modifyCounter}/>
+                            <Game question={this.props.questions[this.props.currentQuestion]}
+                                  currentQuestion = {this.props.currentQuestion}
+                                  onQuestionAnswer={(answer) => {
+                                      this.props.dispatch(questionAnswer(this.props.currentQuestion, answer))}}
+                                  onSubmit = {this.submitQuestions}
+                                  onNextQuestion = {this.nextQuestion}
+                                  isLastQuestion = {isLastQuestion}
+                                  onPreviousQuestion = {this.previousQuestion}
+                                  isFirstQuestion = {isFirstQuestion}
+                                  score = {this.props.score}
+                                  finished = {this.props.finished}
+                                  restart={this.restart}
 
-                        />
+                            />
+
+                        </div>
+
                     ) :
                     (
                         <div>No hay preguntas =(</div>
@@ -102,12 +117,10 @@ class App extends Component {
         );
     }
 }
-
   function mapStateToProps(state){
     return{
         ...state
     };
     }
-
 
 export default connect(mapStateToProps)(App);

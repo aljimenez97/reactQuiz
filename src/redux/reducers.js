@@ -1,5 +1,5 @@
 import { combineReducers } from 'redux';
-import {CHANGE_QUESTION, INIT_QUESTIONS, QUESTION_ANSWER, SUBMIT} from "./actions";
+import {CHANGE_QUESTION, INIT_QUESTIONS, QUESTION_ANSWER, SUBMIT, DECREASE_COUNTER, START_COUNTER} from "./actions";
 
 function score(state = 0, action = {}) {
     switch(action.type){
@@ -64,11 +64,25 @@ function questions(state = [], action = {}) {
             return state;
     }
 }
+
+function time(state = 10, action={}) {
+    switch(action.type) {
+        case DECREASE_COUNTER:
+            let c = --state;
+            return c;
+        case START_COUNTER:
+            let a = 10;
+            return a;
+        default:
+            return state;
+    }
+}
 const GlobalState = (combineReducers({
     score,
     finished,
     currentQuestion,
-    questions
+    questions,
+    time
 }));
 
 export default GlobalState;

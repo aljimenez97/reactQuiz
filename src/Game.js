@@ -4,7 +4,6 @@ import Actionbar from "./Actionbar";
 import Score from './Score'
 export default class Game extends React.Component {
     render() {
-        console.log('is it finished ? ' + this.props.finished);
         return (
             <div className={"gameContainer"}>
               <Content

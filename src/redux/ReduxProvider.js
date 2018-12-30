@@ -6,9 +6,6 @@ import React from 'react';
 import App from '../App';
 
 export default class ReduxProvider extends React.Component {
-    componentDidMount(){
-        console.log('redux mounted');
-    }
     constructor(props) {
         super(props);
         this.initialState = {
@@ -16,19 +13,19 @@ export default class ReduxProvider extends React.Component {
             finished: false,
             currentQuestion: 0,
             questions: [],
-
+            time: 120
         };
         this.store = this.configureStore();
     }
 
     render(){
-    return (
-        <Provider store={ this.store}>
-            <div style={{ height: '100%' }} >
-                <App store={ this.store}/>
-            </div>
-        </Provider>
-    );
+        return (
+            <Provider store={ this.store}>
+                <div style={{ height: '100%' }} >
+                    <App store={ this.store}/>
+                </div>
+            </Provider>
+        );
     }
 
     configureStore(){

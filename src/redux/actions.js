@@ -2,7 +2,8 @@ export const QUESTION_ANSWER = 'QUESTION_ANSWER';
 export const CHANGE_QUESTION = 'CHANGE_QUESTION';
 export const SUBMIT = 'SUBMIT';
 export const INIT_QUESTIONS = 'INIT_QUESTIONS';
-
+export const DECREASE_COUNTER = 'DECREASE_COUNTER';
+export const START_COUNTER = 'START_COUNTER';
 
 
 export function questionAnswer(index, answer) {
@@ -20,3 +21,12 @@ export function submit(questions) {
 export function initQuestions(questions) {
     return { type: INIT_QUESTIONS, payload: { questions } };
 }
+
+export function decreaseCounter() {
+    return { type: DECREASE_COUNTER };
+}
+
+export function startCounter() {
+    return { type: START_COUNTER };
+}
+

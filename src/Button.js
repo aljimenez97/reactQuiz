@@ -6,12 +6,10 @@ export default class Button extends React.Component {
     }
 
     clickFunction(){
-    this.props.clickFunction();
+        this.props.clickFunction();
     }
 
     render() {
-        console.log('click')
-        console.log(this.props.clickFunction)
         return (
             <button onClick={this.clickFunction} disabled={this.props.isDisabled}
                     style={{cursor: this.props.isDisabled ? 'not-allowed' : 'pointer'}}>
