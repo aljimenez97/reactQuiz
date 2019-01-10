@@ -7,9 +7,9 @@ export default class Counter extends React.Component {
             <div className={"timerContainer"}>
                 {this.props.time > 0 ?
                     (<div className={"timerNum"}>
-                        Tiempo restante: {this.props.time}
+                        <p style={{color: (this.props.time <=10) ? 'red' : 'white' }}> Tiempo restante: {this.props.time} </p>
                     </div>) :
-                    <div className={"noTime"}> Se acabó el tiempo</div>
+                    <div className={"noTime"}> <p>Se acabó el tiempo</p></div>
                 }
 
             </div>

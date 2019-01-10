@@ -90,12 +90,11 @@ class App extends Component {
         let isLastQuestion = (currentQuestion === (numQuestions-1));
 
         return (
-            <h1 className="App">
-               <Navbar aria-role={"heading"} title={"QuizGame"}/>
+            <div className="App">
+               <Navbar aria-role={"heading"} title={"QuizGame"} time={this.props.time}/>
                 {this.props.questions.length > 0 ?
                     (
                         <div className={"mainContainer"}>
-                            <Counter time={this.props.time} />
                             <Game question={this.props.questions[this.props.currentQuestion]}
                                   currentQuestion = {this.props.currentQuestion}
                                   onQuestionAnswer={(answer) => {
@@ -119,7 +118,7 @@ class App extends Component {
                     )
                 }
 
-            </h1>
+            </div>
         );
     }
 }

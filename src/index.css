@@ -28,12 +28,24 @@ body {
 }
 
 .navBar {
-    padding-top: 10px;
-    padding-bottom: 10px;
+    padding-top: 5px;
+    padding-bottom: 5px;
     font-size: 25px;
     font-weight: 200;
     background: #32bebe;
     color: white;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.navBar .navBarTitle{
+    flex: 1;
+    margin: 0;
+    margin-left: 2%;
+    text-align: left;
+    font-size: 3vh;
 }
 
 .noQuestions {
@@ -48,21 +60,23 @@ body {
 }
 
 .timerContainer {
-    height: calc(100% - 590px);
+    /*height: calc(100% - 590px);*/
     display: flex;
     flex-direction: row;
-    padding: 20px;
+    flex: 1;
+    /*padding: 20px;*/
     justify-content: center;
     align-content: space-around ;
+    text-align: right;
 }
 
 
 .timerContainer .timerNum{
     display: flex;
     flex-direction: row;
-    felx:1;
-    padding: 20px;
-    justify-content: center;
+    flex:1;
+    /*padding: 20px;*/
+    margin-right: 2%;
     font-size: 1.5vw;
     font-weight: 200;
     border: 1px solid #32bebe;
@@ -72,15 +86,24 @@ body {
 
 .timerContainer .noTime{
     display: flex;
+    flex: 1;
+    margin-right: 2%;
     flex-direction: row;
-    width: 15%;
-    padding: 20px;
-    justify-content: center;
+    /*padding: 20px;*/
     font-size: 1.5vw;
     font-weight: 200;
     border: 1px solid #32bebe;
     background-color: #32bebe4f;
+}
 
+.noTime p {
+    flex: 1;
+    font-size: 2.5vh;
+}
+
+.timerNum p {
+    flex: 1;
+    font-size: 2.5vh;
 }
 
 
@@ -143,8 +166,12 @@ body {
 
 .questionContainer .questionDiv {
     margin-bottom: 5%;
+    font-size: 3vw;
 }
 
+.questionContainer label {
+    font-size: 1.3vw !important;
+}
 .tipsContainer {
     width: 80%;
     display: flex;
