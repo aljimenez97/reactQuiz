@@ -8,7 +8,6 @@ import {
 
 import Game from './Game';
 import Navbar from "./Navbar";
-import Counter from "./Counter";
 
 class App extends Component {
     constructor(props){
@@ -44,8 +43,9 @@ class App extends Component {
             .then((json) => {
                 json.map((item) => {
                     if(item.question) {
-                        quizzes.push(item);
+                         quizzes.push(item);
                     }
+                    return 0;
                 });
                 this.props.dispatch(initQuestions(quizzes));
             })

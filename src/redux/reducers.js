@@ -74,7 +74,6 @@ function time(state = 120, action={}) {
             let a = 120;
             return a;
         case RESET_COUNTER:
-            let b = 0;
             return 0;
         default:
             return state;
