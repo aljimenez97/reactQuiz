@@ -91,7 +91,7 @@ class App extends Component {
 
         return (
             <div className="App">
-               <Navbar aria-role={"heading"} title={"QuizGame"} time={this.props.time}/>
+               <Navbar title={"QuizGame"} time={this.props.time}/>
                 {this.props.questions.length > 0 ?
                     (
                         <div className={"mainContainer"}>

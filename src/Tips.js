@@ -3,7 +3,7 @@ export default class Tips extends React.Component {
     render() {
         return (
             <div className={"tipsContainer"}>
-                <h3 className={"tipsTitle"}>Tips</h3>
+                <div className={"tipsTitle"}>Tips</div>
                     {
                         this.props.tips.length === 0 ?
                             (<div className={"noTips"}> Esta pregunta no tiene pistas</div>) :

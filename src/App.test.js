@@ -22,6 +22,6 @@ beforeEach(()=>{
 })
 
 it('renders without crashing', () => {
-    const h = <Navbar title={"QuizGame"}/>;
+    const h = <Navbar title={"QuizGame"} time={initialState.time}/>;
     expect(wrapper.contains(h)).toEqual(true);
 });
